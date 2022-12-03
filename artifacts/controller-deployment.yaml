@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carrier-controller
+spec:
+  selecto r:
+    matchLabels:
+      controller: carrier
+  template:
+    metadata:
+      labels:
+        controller: carrier
+    spec:
+      containers:
+      - args:
+        - -kubeconfig=/tmp/kubeconfig
+        - -master=https://kubernetes.default.svc:443
+        name: carrier-controller
+        image: tr1stanzhi/carrier:v1
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /tmp/kubeconfig
+          name: kubeconfig
+          readOnly: true
+      volumes:
+      - hostPath:
+          path: /root/config
+        name: kubeconfig
+
+

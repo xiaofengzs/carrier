@@ -1,0 +1,7 @@
+apiVersion: xiaofeng.k8s.io/v1
+kind: Carrier
+metadata:
+  name: backend
+spec:
+  deploymentName: backend
+  replicas: 1

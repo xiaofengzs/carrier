@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xiaofeng
+spec:
+  selector:
+    matchLabels:
+      controller: xiaofeng
+  template:
+    metadata:
+      labels:
+        controller: xiaofeng
+    spec:
+      containers:
+      - args: 
+        - -kubeconfig=/tmp/kubeconfig
+        - -master=https://kubernetes.default.svc:443
+        image: tr1stanzhi/carrier:v1
+        imagePullPolicy: IfNotPresent
+        name: controller
+        volumeMounts:
+        - mountPath: /tmp/kubeconfig
+          name: kubeconfig
+          readOnly: true
+      volumes:
+      - hostPath:
+          path: /root/config
+        name: kubeconfig
