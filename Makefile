@@ -19,4 +19,7 @@ apply_backend:
 apply_controller:
 	kubectl apply -f artifacts/controller-deployment.yaml
 
+clear:
+	kubectl delete -f artifacts/
+
 .PHONY: crd build dcokerbuild dockerpush apply_controller apply_backend

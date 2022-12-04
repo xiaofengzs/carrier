@@ -17,7 +17,7 @@ spec:
         - -master=https://kubernetes.default.svc:443
         name: carrier-controller
         image: tr1stanzhi/carrier:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         volumeMounts:
         - mountPath: /tmp/kubeconfig
           name: kubeconfig
