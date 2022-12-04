@@ -21,6 +21,8 @@ WORKDIR /app
 
 COPY --from=build_base /app/carrier-controller  /app/carrier-controller
 
+RUN chmod 777  /app/carrier-controller
+
 # This container exposes port 8080 to the outside world
 EXPOSE 8080
 
