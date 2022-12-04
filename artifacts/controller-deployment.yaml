@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: carrier-controller
 spec:
-  selecto r:
+  selector:
     matchLabels:
       controller: carrier
   template:
@@ -16,7 +16,7 @@ spec:
         - -kubeconfig=/tmp/kubeconfig
         - -master=https://kubernetes.default.svc:443
         name: carrier-controller
-        image: tr1stanzhi/carrier:v1
+        image: tr1stanzhi/carrier:latest
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /tmp/kubeconfig

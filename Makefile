@@ -1,5 +1,5 @@
 
-run: crd build dcokerbuild dockerpush apply_controller apply_backend
+run: crd dcokerbuild dockerpush apply_controller apply_backend
 
 crd:
 	kubectl apply -f artifacts/crd.yaml
