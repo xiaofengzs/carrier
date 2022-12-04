@@ -12,7 +12,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o  carrier-controller  ./
+RUN go build -o  xiaofeng-controller  ./
 
 # Start fresh from a smaller image
 FROM alpine:3.16
@@ -21,7 +21,7 @@ WORKDIR /app
 
 COPY --from=build_base /app/carrier-controller  /app/carrier-controller
 
-RUN chmod 777  /app/carrier-controller
+RUN chmod 777  /app/xiaofeng-controller
 
 # This container exposes port 8080 to the outside world
 EXPOSE 8080

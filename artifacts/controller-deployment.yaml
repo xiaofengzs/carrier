@@ -15,7 +15,7 @@ spec:
       - args:
         - -kubeconfig=/tmp/kubeconfig
         - -master=https://kubernetes.default.svc:443
-        name: carrier-controller
+        name: xiaofeng-controller
         image: tr1stanzhi/carrier:latest
         imagePullPolicy: Always
         volumeMounts:

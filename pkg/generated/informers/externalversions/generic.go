@@ -19,7 +19,7 @@ limitations under the License.
 package externalversions
 
 import (
-	v1 "carrier/pkg/apis/carrier/v1"
+	v1 "carrier/pkg/apis/xiaofeng/v1"
 	"fmt"
 
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -52,9 +52,9 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=carrier.k8s.io, Version=v1
+	// Group=xiaofeng.k8s.io, Version=v1
 	case v1.SchemeGroupVersion.WithResource("carriers"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Carrier().V1().Carriers().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Xiaofeng().V1().Carriers().Informer()}, nil
 
 	}
 

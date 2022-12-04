@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "carrier/pkg/generated/clientset/versioned"
-	carrierv1 "carrier/pkg/generated/clientset/versioned/typed/carrier/v1"
-	fakecarrierv1 "carrier/pkg/generated/clientset/versioned/typed/carrier/v1/fake"
+	xiaofengv1 "carrier/pkg/generated/clientset/versioned/typed/xiaofeng/v1"
+	fakexiaofengv1 "carrier/pkg/generated/clientset/versioned/typed/xiaofeng/v1/fake"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -80,7 +80,7 @@ var (
 	_ testing.FakeClient  = &Clientset{}
 )
 
-// CarrierV1 retrieves the CarrierV1Client
-func (c *Clientset) CarrierV1() carrierv1.CarrierV1Interface {
-	return &fakecarrierv1.FakeCarrierV1{Fake: &c.Fake}
+// XiaofengV1 retrieves the XiaofengV1Client
+func (c *Clientset) XiaofengV1() xiaofengv1.XiaofengV1Interface {
+	return &fakexiaofengv1.FakeXiaofengV1{Fake: &c.Fake}
 }

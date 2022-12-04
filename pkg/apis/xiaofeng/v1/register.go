@@ -17,14 +17,14 @@ limitations under the License.
 package v1
 
 import (
-	"carrier/pkg/apis/carrier"
+	"carrier/pkg/apis/xiaofeng"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
 // SchemeGroupVersion is group version used to register these objects
-var SchemeGroupVersion = schema.GroupVersion{Group: carrier.GroupName, Version: "v1"}
+var SchemeGroupVersion = schema.GroupVersion{Group: xiaofeng.GroupName, Version: "v1"}
 
 // Kind takes an unqualified kind and returns back a Group qualified GroupKind
 func Kind(kind string) schema.GroupKind {

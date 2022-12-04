@@ -19,7 +19,7 @@ limitations under the License.
 package versioned
 
 import (
-	carrierv1 "carrier/pkg/generated/clientset/versioned/typed/carrier/v1"
+	xiaofengv1 "carrier/pkg/generated/clientset/versioned/typed/xiaofeng/v1"
 	"fmt"
 	"net/http"
 
@@ -30,19 +30,19 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	CarrierV1() carrierv1.CarrierV1Interface
+	XiaofengV1() xiaofengv1.XiaofengV1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	carrierV1 *carrierv1.CarrierV1Client
+	xiaofengV1 *xiaofengv1.XiaofengV1Client
 }
 
-// CarrierV1 retrieves the CarrierV1Client
-func (c *Clientset) CarrierV1() carrierv1.CarrierV1Interface {
-	return c.carrierV1
+// XiaofengV1 retrieves the XiaofengV1Client
+func (c *Clientset) XiaofengV1() xiaofengv1.XiaofengV1Interface {
+	return c.xiaofengV1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -89,7 +89,7 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 
 	var cs Clientset
 	var err error
-	cs.carrierV1, err = carrierv1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	cs.xiaofengV1, err = xiaofengv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.carrierV1 = carrierv1.New(c)
+	cs.xiaofengV1 = xiaofengv1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

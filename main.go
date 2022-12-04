@@ -27,7 +27,6 @@ import (
 	"k8s.io/klog/v2"
 	"k8s.io/sample-controller/pkg/signals"
 	"time"
-
 	// Uncomment the following line to load the gcp plugin (only required to authenticate against GKE clusters).
 	// _ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 )
@@ -43,7 +42,7 @@ func main() {
 	klog.InitFlags(nil)
 	flag.Parse()
 
-	klog.Infof("Start serving for carrier.")
+	klog.Infof("Start serving for xiaofeng.")
 
 	// set up signals so we handle the first shutdown signal gracefully
 	stopCh := signals.SetupSignalHandler()
@@ -68,7 +67,7 @@ func main() {
 
 	controller := NewController(kubeClient, carrierClient,
 		kubeInformerFactory.Apps().V1().Deployments(),
-		carrierInformerFactory.Carrier().V1().Carriers())
+		carrierInformerFactory.Xiaofeng().V1().Carriers())
 
 	// notice that there is no need to run Start methods in a separate goroutine. (i.e. go kubeInformerFactory.Start(stopCh)
 	// Start method is non-blocking and runs all registered informers in a dedicated goroutine.

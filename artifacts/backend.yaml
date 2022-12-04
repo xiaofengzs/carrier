@@ -4,4 +4,4 @@ metadata:
   name: backend
 spec:
   deploymentName: backend
-  replicas: 1
+  replicas: 2

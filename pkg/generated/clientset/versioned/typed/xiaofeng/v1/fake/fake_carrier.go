@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	carrierv1 "carrier/pkg/apis/carrier/v1"
+	xiaofengv1 "carrier/pkg/apis/xiaofeng/v1"
 	"context"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -32,29 +32,29 @@ import (
 
 // FakeCarriers implements CarrierInterface
 type FakeCarriers struct {
-	Fake *FakeCarrierV1
+	Fake *FakeXiaofengV1
 	ns   string
 }
 
-var carriersResource = schema.GroupVersionResource{Group: "carrier.k8s.io", Version: "v1", Resource: "carriers"}
+var carriersResource = schema.GroupVersionResource{Group: "xiaofeng.k8s.io", Version: "v1", Resource: "carriers"}
 
-var carriersKind = schema.GroupVersionKind{Group: "carrier.k8s.io", Version: "v1", Kind: "Carrier"}
+var carriersKind = schema.GroupVersionKind{Group: "xiaofeng.k8s.io", Version: "v1", Kind: "Carrier"}
 
 // Get takes name of the carrier, and returns the corresponding carrier object, and an error if there is any.
-func (c *FakeCarriers) Get(ctx context.Context, name string, options v1.GetOptions) (result *carrierv1.Carrier, err error) {
+func (c *FakeCarriers) Get(ctx context.Context, name string, options v1.GetOptions) (result *xiaofengv1.Carrier, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(carriersResource, c.ns, name), &carrierv1.Carrier{})
+		Invokes(testing.NewGetAction(carriersResource, c.ns, name), &xiaofengv1.Carrier{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*carrierv1.Carrier), err
+	return obj.(*xiaofengv1.Carrier), err
 }
 
 // List takes label and field selectors, and returns the list of Carriers that match those selectors.
-func (c *FakeCarriers) List(ctx context.Context, opts v1.ListOptions) (result *carrierv1.CarrierList, err error) {
+func (c *FakeCarriers) List(ctx context.Context, opts v1.ListOptions) (result *xiaofengv1.CarrierList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(carriersResource, carriersKind, c.ns, opts), &carrierv1.CarrierList{})
+		Invokes(testing.NewListAction(carriersResource, carriersKind, c.ns, opts), &xiaofengv1.CarrierList{})
 
 	if obj == nil {
 		return nil, err
@@ -64,8 +64,8 @@ func (c *FakeCarriers) List(ctx context.Context, opts v1.ListOptions) (result *c
 	if label == nil {
 		label = labels.Everything()
 	}
-	list := &carrierv1.CarrierList{ListMeta: obj.(*carrierv1.CarrierList).ListMeta}
-	for _, item := range obj.(*carrierv1.CarrierList).Items {
+	list := &xiaofengv1.CarrierList{ListMeta: obj.(*xiaofengv1.CarrierList).ListMeta}
+	for _, item := range obj.(*xiaofengv1.CarrierList).Items {
 		if label.Matches(labels.Set(item.Labels)) {
 			list.Items = append(list.Items, item)
 		}
@@ -81,43 +81,43 @@ func (c *FakeCarriers) Watch(ctx context.Context, opts v1.ListOptions) (watch.In
 }
 
 // Create takes the representation of a carrier and creates it.  Returns the server's representation of the carrier, and an error, if there is any.
-func (c *FakeCarriers) Create(ctx context.Context, carrier *carrierv1.Carrier, opts v1.CreateOptions) (result *carrierv1.Carrier, err error) {
+func (c *FakeCarriers) Create(ctx context.Context, carrier *xiaofengv1.Carrier, opts v1.CreateOptions) (result *xiaofengv1.Carrier, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(carriersResource, c.ns, carrier), &carrierv1.Carrier{})
+		Invokes(testing.NewCreateAction(carriersResource, c.ns, carrier), &xiaofengv1.Carrier{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*carrierv1.Carrier), err
+	return obj.(*xiaofengv1.Carrier), err
 }
 
 // Update takes the representation of a carrier and updates it. Returns the server's representation of the carrier, and an error, if there is any.
-func (c *FakeCarriers) Update(ctx context.Context, carrier *carrierv1.Carrier, opts v1.UpdateOptions) (result *carrierv1.Carrier, err error) {
+func (c *FakeCarriers) Update(ctx context.Context, carrier *xiaofengv1.Carrier, opts v1.UpdateOptions) (result *xiaofengv1.Carrier, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(carriersResource, c.ns, carrier), &carrierv1.Carrier{})
+		Invokes(testing.NewUpdateAction(carriersResource, c.ns, carrier), &xiaofengv1.Carrier{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*carrierv1.Carrier), err
+	return obj.(*xiaofengv1.Carrier), err
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeCarriers) UpdateStatus(ctx context.Context, carrier *carrierv1.Carrier, opts v1.UpdateOptions) (*carrierv1.Carrier, error) {
+func (c *FakeCarriers) UpdateStatus(ctx context.Context, carrier *xiaofengv1.Carrier, opts v1.UpdateOptions) (*xiaofengv1.Carrier, error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateSubresourceAction(carriersResource, "status", c.ns, carrier), &carrierv1.Carrier{})
+		Invokes(testing.NewUpdateSubresourceAction(carriersResource, "status", c.ns, carrier), &xiaofengv1.Carrier{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*carrierv1.Carrier), err
+	return obj.(*xiaofengv1.Carrier), err
 }
 
 // Delete takes name of the carrier and deletes it. Returns an error if one occurs.
 func (c *FakeCarriers) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteActionWithOptions(carriersResource, c.ns, name, opts), &carrierv1.Carrier{})
+		Invokes(testing.NewDeleteActionWithOptions(carriersResource, c.ns, name, opts), &xiaofengv1.Carrier{})
 
 	return err
 }
@@ -126,17 +126,17 @@ func (c *FakeCarriers) Delete(ctx context.Context, name string, opts v1.DeleteOp
 func (c *FakeCarriers) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
 	action := testing.NewDeleteCollectionAction(carriersResource, c.ns, listOpts)
 
-	_, err := c.Fake.Invokes(action, &carrierv1.CarrierList{})
+	_, err := c.Fake.Invokes(action, &xiaofengv1.CarrierList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched carrier.
-func (c *FakeCarriers) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *carrierv1.Carrier, err error) {
+func (c *FakeCarriers) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *xiaofengv1.Carrier, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(carriersResource, c.ns, name, pt, data, subresources...), &carrierv1.Carrier{})
+		Invokes(testing.NewPatchSubresourceAction(carriersResource, c.ns, name, pt, data, subresources...), &xiaofengv1.Carrier{})
 
 	if obj == nil {
 		return nil, err
 	}
-	return obj.(*carrierv1.Carrier), err
+	return obj.(*xiaofengv1.Carrier), err
 }

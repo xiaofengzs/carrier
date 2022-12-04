@@ -20,8 +20,8 @@ package externalversions
 
 import (
 	versioned "carrier/pkg/generated/clientset/versioned"
-	carrier "carrier/pkg/generated/informers/externalversions/carrier"
 	internalinterfaces "carrier/pkg/generated/informers/externalversions/internalinterfaces"
+	xiaofeng "carrier/pkg/generated/informers/externalversions/xiaofeng"
 	reflect "reflect"
 	sync "sync"
 	time "time"
@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Carrier() carrier.Interface
+	Xiaofeng() xiaofeng.Interface
 }
 
-func (f *sharedInformerFactory) Carrier() carrier.Interface {
-	return carrier.New(f, f.namespace, f.tweakListOptions)
+func (f *sharedInformerFactory) Xiaofeng() xiaofeng.Interface {
+	return xiaofeng.New(f, f.namespace, f.tweakListOptions)
 }

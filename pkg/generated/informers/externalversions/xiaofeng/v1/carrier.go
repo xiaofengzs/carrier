@@ -19,10 +19,10 @@ limitations under the License.
 package v1
 
 import (
-	carrierv1 "carrier/pkg/apis/carrier/v1"
+	xiaofengv1 "carrier/pkg/apis/xiaofeng/v1"
 	versioned "carrier/pkg/generated/clientset/versioned"
 	internalinterfaces "carrier/pkg/generated/informers/externalversions/internalinterfaces"
-	v1 "carrier/pkg/generated/listers/carrier/v1"
+	v1 "carrier/pkg/generated/listers/xiaofeng/v1"
 	"context"
 	time "time"
 
@@ -62,16 +62,16 @@ func NewFilteredCarrierInformer(client versioned.Interface, namespace string, re
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.CarrierV1().Carriers(namespace).List(context.TODO(), options)
+				return client.XiaofengV1().Carriers(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.CarrierV1().Carriers(namespace).Watch(context.TODO(), options)
+				return client.XiaofengV1().Carriers(namespace).Watch(context.TODO(), options)
 			},
 		},
-		&carrierv1.Carrier{},
+		&xiaofengv1.Carrier{},
 		resyncPeriod,
 		indexers,
 	)
@@ -82,7 +82,7 @@ func (f *carrierInformer) defaultInformer(client versioned.Interface, resyncPeri
 }
 
 func (f *carrierInformer) Informer() cache.SharedIndexInformer {
-	return f.factory.InformerFor(&carrierv1.Carrier{}, f.defaultInformer)
+	return f.factory.InformerFor(&xiaofengv1.Carrier{}, f.defaultInformer)
 }
 
 func (f *carrierInformer) Lister() v1.CarrierLister {

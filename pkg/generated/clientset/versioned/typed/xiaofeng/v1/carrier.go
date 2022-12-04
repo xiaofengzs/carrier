@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	v1 "carrier/pkg/apis/carrier/v1"
+	v1 "carrier/pkg/apis/xiaofeng/v1"
 	scheme "carrier/pkg/generated/clientset/versioned/scheme"
 	"context"
 	"time"
@@ -57,7 +57,7 @@ type carriers struct {
 }
 
 // newCarriers returns a Carriers
-func newCarriers(c *CarrierV1Client, namespace string) *carriers {
+func newCarriers(c *XiaofengV1Client, namespace string) *carriers {
 	return &carriers{
 		client: c.RESTClient(),
 		ns:     namespace,

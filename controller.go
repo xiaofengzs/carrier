@@ -37,11 +37,11 @@ import (
 	"k8s.io/client-go/util/workqueue"
 	"k8s.io/klog/v2"
 
-	carrierv1 "carrier/pkg/apis/carrier/v1"
+	carrierv1 "carrier/pkg/apis/xiaofeng/v1"
 	clientset "carrier/pkg/generated/clientset/versioned"
 	carrierscheme "carrier/pkg/generated/clientset/versioned/scheme"
-	informers "carrier/pkg/generated/informers/externalversions/carrier/v1"
-	listers "carrier/pkg/generated/listers/carrier/v1"
+	informers "carrier/pkg/generated/informers/externalversions/xiaofeng/v1"
+	listers "carrier/pkg/generated/listers/xiaofeng/v1"
 )
 
 const controllerAgentName = "sample-controller"
@@ -61,7 +61,7 @@ const (
 	MessageResourceSynced = "Carrier synced successfully"
 )
 
-// Controller is the controller implementation for carrier resources
+// Controller is the controller implementation for xiaofeng resources
 type Controller struct {
 	// kubeclientset is a standard kubernetes clientset
 	kubeclientset kubernetes.Interface
@@ -113,7 +113,7 @@ func NewController(
 	}
 
 	klog.Info("Setting up event handlers")
-	// Set up an event handler for when carrier resources change
+	// Set up an event handler for when xiaofeng resources change
 	carrierInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: controller.enqueueCarrier,
 		UpdateFunc: func(old, new interface{}) {
@@ -254,7 +254,7 @@ func (c *Controller) syncHandler(key string) error {
 		// The Carrier resource may no longer exist, in which case we stop
 		// processing.
 		if errors.IsNotFound(err) {
-			utilruntime.HandleError(fmt.Errorf("carrier '%s' in work queue no longer exists", key))
+			utilruntime.HandleError(fmt.Errorf("xiaofeng '%s' in work queue no longer exists", key))
 			return nil
 		}
 
@@ -271,7 +271,7 @@ func (c *Controller) syncHandler(key string) error {
 	}
 
 	// Get the deployment with the name specified in Carrier.spec
-	//deployment, err := c.deploymentsLister.Deployments(carrier.Namespace).Get(deploymentName)
+	//deployment, err := c.deploymentsLister.Deployments(xiaofeng.Namespace).Get(deploymentName)
 	deployment, err := c.deploymentsLister.Deployments(carrier.Namespace).Get(deploymentName)
 	// If the resource doesn't exist, we'll create it
 	if errors.IsNotFound(err) {
@@ -329,7 +329,7 @@ func (c *Controller) updateCarrierStatus(carrier *carrierv1.Carrier, deployment 
 	// we must use Update instead of UpdateStatus to update the Status block of the Carrier resource.
 	// UpdateStatus will not allow changes to the Spec of the resource,
 	// which is ideal for ensuring nothing other than resource status has been updated.
-	_, err := c.carrierclientset.CarrierV1().Carriers(carrier.Namespace).UpdateStatus(context.TODO(), carrierCopy, metav1.UpdateOptions{})
+	_, err := c.carrierclientset.XiaofengV1().Carriers(carrier.Namespace).UpdateStatus(context.TODO(), carrierCopy, metav1.UpdateOptions{})
 	return err
 }
 
@@ -377,7 +377,7 @@ func (c *Controller) handleObject(obj interface{}) {
 
 		carrier, err := c.carriersLister.Carriers(object.GetNamespace()).Get(ownerRef.Name)
 		if err != nil {
-			klog.V(4).Infof("ignoring orphaned object '%s/%s' of carrier '%s'", object.GetNamespace(), object.GetName(), ownerRef.Name)
+			klog.V(4).Infof("ignoring orphaned object '%s/%s' of xiaofeng '%s'", object.GetNamespace(), object.GetName(), ownerRef.Name)
 			return
 		}
 

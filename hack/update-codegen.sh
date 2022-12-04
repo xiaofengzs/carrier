@@ -10,6 +10,6 @@ CODEGEN_PKG=${CODEGEN_PKG:-$(cd "${SCRIPT_ROOT}"; ls -d -1 ./carrier/vendor/k8s.
   "deepcopy,client,informer,lister" \
   carrier/pkg/generated\
   carrier/pkg/apis \
-  carrier:v1 \
+  xiaofeng:v1 \
   --output-base $(pwd)/../.. \
   --go-header-file $(pwd)/boilerplate.go.txt

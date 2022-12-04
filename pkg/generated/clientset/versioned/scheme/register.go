@@ -19,7 +19,7 @@ limitations under the License.
 package scheme
 
 import (
-	carrierv1 "carrier/pkg/apis/carrier/v1"
+	xiaofengv1 "carrier/pkg/apis/xiaofeng/v1"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -32,7 +32,7 @@ var Scheme = runtime.NewScheme()
 var Codecs = serializer.NewCodecFactory(Scheme)
 var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
-	carrierv1.AddToScheme,
+	xiaofengv1.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

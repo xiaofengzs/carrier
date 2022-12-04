@@ -19,7 +19,6 @@ spec:
       served: true
       storage: true
       schema:
-        # schema used for validation
         openAPIV3Schema:
           type: object
           properties:
@@ -40,7 +39,7 @@ spec:
   names:
     kind: Carrier
     plural: carriers
-    singular: carrier
+    singular: xiaofeng
     shortNames:
       - cr
   scope: Namespaced
