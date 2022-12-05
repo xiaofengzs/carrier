@@ -44,7 +44,7 @@ import (
 	listers "carrier/pkg/generated/listers/xiaofeng/v1"
 )
 
-const controllerAgentName = "sample-controller"
+const controllerAgentName = "carrier-controller"
 
 const (
 	// SuccessSynced is used as part of the Event 'reason' when a Carrier is synced
@@ -84,7 +84,7 @@ type Controller struct {
 	recorder record.EventRecorder
 }
 
-// NewController returns a new sample controller
+// NewController returns a new carrier controller
 func NewController(
 	kubeclientset kubernetes.Interface,
 	carrierclientset clientset.Interface,
@@ -92,8 +92,8 @@ func NewController(
 	carrierInformer informers.CarrierInformer) *Controller {
 
 	// Create event broadcaster
-	// Add sample-controller types to the default Kubernetes Scheme so Events can be
-	// logged for sample-controller types.
+	// Add carrier-controller types to the default Kubernetes Scheme so Events can be
+	// logged for carrier-controller types.
 	utilruntime.Must(carrierscheme.AddToScheme(scheme.Scheme))
 	klog.V(4).Info("Creating event broadcaster")
 	eventBroadcaster := record.NewBroadcaster()
@@ -271,7 +271,6 @@ func (c *Controller) syncHandler(key string) error {
 	}
 
 	// Get the deployment with the name specified in Carrier.spec
-	//deployment, err := c.deploymentsLister.Deployments(xiaofeng.Namespace).Get(deploymentName)
 	deployment, err := c.deploymentsLister.Deployments(carrier.Namespace).Get(deploymentName)
 	// If the resource doesn't exist, we'll create it
 	if errors.IsNotFound(err) {

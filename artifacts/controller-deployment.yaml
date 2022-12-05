@@ -5,17 +5,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      controller: carrier
+      controller: carrier-controller
   template:
     metadata:
       labels:
-        controller: carrier
+        controller: carrier-controller
     spec:
       containers:
       - args:
         - -kubeconfig=/tmp/kubeconfig
         - -master=https://kubernetes.default.svc:443
-        name: xiaofeng-controller
+        name: carrier-controller
         image: tr1stanzhi/carrier:latest
         imagePullPolicy: Always
         volumeMounts:
