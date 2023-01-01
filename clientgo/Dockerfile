@@ -10,7 +10,7 @@ COPY go.sum ./
 
 RUN go mod download
 
-COPY . .
+COPY .. .
 
 RUN go build -o  carrier-controller  ./
 
@@ -20,7 +20,7 @@ FROM alpine:3.16
 WORKDIR /app
 
 COPY --from=build_base /app/carrier-controller  /app/carrier-controller
-COPY ./hack/config /app/
+COPY hack/config /app/
 
 RUN chmod 777  /app/carrier-controller
 

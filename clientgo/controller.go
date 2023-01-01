@@ -19,8 +19,14 @@ package main
 import (
 	"context"
 	"fmt"
+	"k8s.io/klog/v2"
 	"time"
 
+	carrierv1 "carrier/pkg/apis/xiaofeng/v1"
+	clientset "carrier/pkg/generated/clientset/versioned"
+	carrierscheme "carrier/pkg/generated/clientset/versioned/scheme"
+	informers "carrier/pkg/generated/informers/externalversions/xiaofeng/v1"
+	listers "carrier/pkg/generated/listers/xiaofeng/v1"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -35,13 +41,6 @@ import (
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/record"
 	"k8s.io/client-go/util/workqueue"
-	"k8s.io/klog/v2"
-
-	carrierv1 "carrier/pkg/apis/xiaofeng/v1"
-	clientset "carrier/pkg/generated/clientset/versioned"
-	carrierscheme "carrier/pkg/generated/clientset/versioned/scheme"
-	informers "carrier/pkg/generated/informers/externalversions/xiaofeng/v1"
-	listers "carrier/pkg/generated/listers/xiaofeng/v1"
 )
 
 const controllerAgentName = "carrier-controller"
@@ -328,7 +327,8 @@ func (c *Controller) updateCarrierStatus(carrier *carrierv1.Carrier, deployment 
 	// we must use Update instead of UpdateStatus to update the Status block of the Carrier resource.
 	// UpdateStatus will not allow changes to the Spec of the resource,
 	// which is ideal for ensuring nothing other than resource status has been updated.
-	_, err := c.carrierclientset.XiaofengV1().Carriers(carrier.Namespace).UpdateStatus(context.TODO(), carrierCopy, metav1.UpdateOptions{})
+	_, err := c.carrierclientset.XiaofengV1().Carriers(carrier.Namespace).Update(context.TODO(), carrierCopy, metav1.UpdateOptions{})
+
 	return err
 }
 
