@@ -1,0 +1,21 @@
+apiVersion: controller.xiaofeng.cloud/v1
+kind: Carrier
+metadata:
+  labels:
+    app.kubernetes.io/name: carrier
+    app.kubernetes.io/instance: carrier-sample
+    app.kubernetes.io/part-of: kb
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: kb
+  name: carrier-sample
+spec:
+  replicas: 3
+  image: tomcat:latest
+  port: 8080
+  enableService: true
+  serviceConfig:
+    port: 8080
+    targetPort: 8080
+    type: NodePort
+    nodePort: 30007
+

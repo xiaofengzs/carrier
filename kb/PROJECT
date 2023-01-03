@@ -1,0 +1,16 @@
+domain: xiaofeng.cloud
+layout:
+- go.kubebuilder.io/v3
+projectName: kb
+repo: github.com/carrier/kb
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: xiaofeng.cloud
+  group: controller
+  kind: Carrier
+  path: github.com/carrier/kb/api/v1
+  version: v1
+version: "3"
